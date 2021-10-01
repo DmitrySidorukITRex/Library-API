@@ -7,7 +7,7 @@ const keys = require('../config/keys');
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: keys.jwt
-}
+};
 
 module.exports = passport => {
     passport.use(
@@ -16,9 +16,9 @@ module.exports = passport => {
                 const user = await User.findById(payload.userId).select('email id');
 
                 if (user) {
-                    done(null, user)
+                    done(null, user);
                 } else {
-                    done(null, false)
+                    done(null, false);
                 }
             } catch(e) {
                 console.log(e);
