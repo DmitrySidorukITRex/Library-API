@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    height: 100%;
+
+    .left-side {
+        display: flex;
+        flex: 1;
+
+        main {
+            width: 60%;
+            margin: auto;
+
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }        
+    }
+
+    .right-side {
+        flex: 1;
+    }
+}
