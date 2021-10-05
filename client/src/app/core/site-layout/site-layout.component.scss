@@ -1,0 +1,24 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: lightblue;
+    padding: 0 16px;
+
+    mat-list {
+        display: flex;
+
+        mat-list-item {
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        .active-link {
+            color: white;
+        }
+    }
+}

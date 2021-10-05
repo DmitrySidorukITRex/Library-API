@@ -1,0 +1,58 @@
+<div class="users">
+    <div>
+        <button mat-raised-button color="primary" (click)="onAddUser()">Add User</button>
+    </div>
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="books">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Books</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.books}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="penalty">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Penalty</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.penalty}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <span class="material-icons">more_vert</span>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="onEditUser(element.id)">
+                        <span class="material-icons">edit</span>
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="onRemoveUser(element.id)">
+                        <span class="material-icons">delete</span>
+                      <span>Delete</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span class="material-icons">brush</span>
+                      <span>Penalty</span>
+                    </button>
+                  </mat-menu>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+</div>

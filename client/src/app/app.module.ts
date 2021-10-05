@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { BooksModule } from './books/books.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { UsersModule } from './users/users.module';
 
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent        
     ],
     imports: [
         BrowserModule,
@@ -20,7 +21,8 @@ import { SharedModule } from './shared/shared.module';
         CoreModule,
         SharedModule,
         HttpClientModule,
-        BooksModule
+        BooksModule,
+        UsersModule
     ],
     providers: [],
     bootstrap: [AppComponent]
