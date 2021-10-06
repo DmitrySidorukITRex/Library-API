@@ -38,6 +38,10 @@ export class AddEditUserComponent implements OnInit {
         return this.userForm.controls;
     }
 
+    get title(): string {
+        return this.isEditing ? 'Edit User' : 'Add User';
+    }
+
     public close(): void {
         this.dialogRef.close(false);
     }
@@ -62,7 +66,7 @@ export class AddEditUserComponent implements OnInit {
             .subscribe(() => {
                 this.isLoading = false;
                 this.dialogRef.close(true);
-            })
+            });
     }
 
     private getUserModel(): IUserApi {
@@ -75,7 +79,7 @@ export class AddEditUserComponent implements OnInit {
             books: [],
             penalty: 0,
             _id: this.data?.user._id
-        }
+        };
     }
 
 }

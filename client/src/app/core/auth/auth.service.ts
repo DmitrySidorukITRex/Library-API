@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class AuthService {
     private token: string = '';
+    private isAdmin: boolean = false;
 
     constructor(private http: HttpClient) { }
 
@@ -14,12 +15,14 @@ export class AuthService {
         return this.http.post<IUserForRegister>('api/auth/register', user);
     }
 
-    public login(user: IUserForLogin): Observable<{token: string}> {
-        return this.http.post<{token: string}>('/api/auth/login', user)
+    public login(user: IUserForLogin): Observable<{token: string, isAdmin: boolean}> {
+        return this.http.post<{token: string, isAdmin: boolean}>('/api/auth/login', user)
             .pipe(
-                tap(({token}) => {
+                tap(({token, isAdmin}) => {
                     localStorage.setItem('auth-token', token);
+                    localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
                     this.setToken(token);
+                    this.setAdmin(isAdmin);
                 })
             );
     }
@@ -39,5 +42,13 @@ export class AuthService {
     public logout(): void {
         this.setToken('');
         localStorage.clear();
+    }
+
+    public setAdmin(isAdmin: boolean): void {
+        this.isAdmin = isAdmin;
+    }
+
+    public getAdmin(): boolean {
+        return this.isAdmin;
     }
 }

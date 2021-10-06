@@ -11,9 +11,13 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        const token = localStorage.getItem('auth-token')
+        const token = localStorage.getItem('auth-token');
+        const isAdmin = localStorage.getItem('isAdmin');
         if (token) {
             this.auth.setToken(token);
+        }
+        if (isAdmin) {
+            this.auth.setAdmin(JSON.parse(isAdmin));
         }
     }
 }

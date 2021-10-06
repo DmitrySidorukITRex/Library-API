@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { ToastTypes } from '../shared/enums/enum';
 import { IUserApi, IUserView } from '../shared/interfaces/user.interface';
 import { ToastService } from '../shared/services/toast.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
+import { PenaltyModalComponent } from './penalty-modal/penalty-modal.component';
 import { getUsersForTable } from './users.mapper';
 import { UsersService } from './users.service';
 
@@ -42,17 +43,7 @@ export class UsersComponent implements OnInit {
             width: '600px'
         });
 
-        dialogRef.afterClosed()
-            .pipe(untilDestroyed(this))
-            .subscribe(
-                result => {
-                    if (result) {
-                        this.getData();
-                        this.toastService.open('The user has been successfully created.')
-                    }
-                },
-                err => this.toastService.open(err.error.message, ToastTypes.Error)
-            );
+        this.afterModalClosed(dialogRef, 'The user has been successfully created.');
     }
 
     public onEditUser(userId: string): void {
@@ -64,17 +55,7 @@ export class UsersComponent implements OnInit {
             }
         });
 
-        dialogRef.afterClosed()
-            .pipe(untilDestroyed(this))
-            .subscribe(
-                result => {
-                    if (result) {
-                        this.getData();
-                        this.toastService.open('The user has been successfully updated.')
-                    }
-                },
-                err => this.toastService.open(err.error.message, ToastTypes.Error)
-            );
+        this.afterModalClosed(dialogRef, 'The user has been successfully updated.');
     }
 
     public onRemoveUser(userId: string): void {
@@ -88,6 +69,18 @@ export class UsersComponent implements OnInit {
                 callBack: this.removeUser.bind(this)
             }
         });
+    }
+
+    public onUpdatePenalty(userId: string): void {
+        const user = this.users.find(x => x._id === userId);
+        const dialogRef = this.dialog.open(PenaltyModalComponent, {
+            width: '400px',
+            data: {
+                user
+            }
+        });
+
+        this.afterModalClosed(dialogRef, 'The user penalty has been successfully updated.');
     }
 
     private getData(): void {
@@ -111,6 +104,20 @@ export class UsersComponent implements OnInit {
                 this.toastService.open('The user has been successfully removed.')
                 this.getData();
             }, err => this.toastService.open(err.error.message, ToastTypes.Error));
+    }
+
+    private afterModalClosed(dialogRef: MatDialogRef<any, any>, message: string): void {
+        dialogRef.afterClosed()
+            .pipe(untilDestroyed(this))
+            .subscribe(
+                result => {
+                    if (result) {
+                        this.getData();
+                        this.toastService.open(message)
+                    }
+                },
+                err => this.toastService.open(err.error.message, ToastTypes.Error)
+            );
     }
 
 }

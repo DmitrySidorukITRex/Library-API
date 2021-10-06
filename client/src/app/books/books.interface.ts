@@ -6,5 +6,15 @@ export interface IBook {
     originalName: string,
     originalAuthor: string,
     isAvailable: boolean,
-    userId: string
+    userId: string,
+    _id: string
+}
+
+export interface ICreateBook {
+    name: string,
+    author: string,
+    category: string[],
+    annotation: string,
+    originalName?: string,
+    originalAuthor?: string
 }

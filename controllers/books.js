@@ -30,9 +30,23 @@ module.exports.create = async function(req, res) {
     }
 }
 
-module.exports.update = function(req, res) {
-    try {
+module.exports.update = async function(req, res) {
+    const updated = {
+        name: req.body.name,
+        author: req.body.author,
+        originalName: req.body.originalName,
+        originalAuthor: req.body.originalAuthor,
+        category: req.body.category,
+        annotation: req.body.annotation
+    };
 
+    try {
+        const book = await Book.findOneAndUpdate(
+            {_id: req.params.id},
+            {$set: updated},
+            {new: true}
+        );
+        res.status(200).json(book);
     } catch(e) {
         errorHandler(res, e);
     }

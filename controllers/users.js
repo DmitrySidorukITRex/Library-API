@@ -35,7 +35,8 @@ module.exports.update = async function(req, res) {
         name: req.body.name,
         lastName: req.body.lastName,
         address: req.body.address,
-        isAdmin: req.body.isAdmin
+        isAdmin: req.body.isAdmin,
+        penalty: req.body.penalty
     };
 
     try {
