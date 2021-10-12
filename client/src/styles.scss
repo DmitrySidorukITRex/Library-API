@@ -13,6 +13,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 
+.mat-menu-panel {
+    min-height: max-content !important;
+}
+
 .mat-menu-content:not(:empty) {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
@@ -29,4 +33,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-column-actions {
     max-width: 24px;
+}
+
+.mat-header-cell, .mat-cell {
+    padding-right: 10px;
+}
+
+button {
+    &[disabled] {
+        opacity: 0.7;
+    }
 }

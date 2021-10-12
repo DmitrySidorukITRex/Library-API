@@ -18,8 +18,8 @@ module.exports.create = async function(req, res) {
         annotation: req.body.annotation,
         originalName: req.body.originalName,
         originalAuthor: req.body.originalAuthor,
-        isAvailable: true,
-        userId: null
+        availability: req.body.availability,
+        isAvailable: true
     });
 
     try {
@@ -37,7 +37,8 @@ module.exports.update = async function(req, res) {
         originalName: req.body.originalName,
         originalAuthor: req.body.originalAuthor,
         category: req.body.category,
-        annotation: req.body.annotation
+        annotation: req.body.annotation,
+        availability: req.body.availability
     };
 
     try {

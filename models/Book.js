@@ -28,9 +28,9 @@ const bookSchema = new Schema({
         type: Boolean,
         default: true
     },
-    userId: {
-        ref: 'user',
-        type: Schema.Types.ObjectId
+    availability: {
+        type: Array,
+        required: true
     }
 });
 

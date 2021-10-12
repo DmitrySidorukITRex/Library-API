@@ -25,7 +25,7 @@
     
         <ng-container matColumnDef="penalty">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Penalty</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.penalty}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{getPenaltyDueDate(element.penaltyDueDate) | date:'short'}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">

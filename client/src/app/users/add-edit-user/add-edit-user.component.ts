@@ -76,8 +76,8 @@ export class AddEditUserComponent implements OnInit {
             lastName: this.f.lastName.value,
             address: this.f.address.value,
             isAdmin: this.f.isAdmin.value,
-            books: [],
-            penalty: 0,
+            books: this.data?.user.books || [],
+            penaltyDueDate: this.data?.user.penaltyDueDate || '',
             _id: this.data?.user._id
         };
     }

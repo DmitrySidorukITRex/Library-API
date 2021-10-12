@@ -27,9 +27,15 @@
         <mat-form-field appearance="outline">
             <mat-label>Category</mat-label>
             <mat-select formControlName="category" multiple>
-              <mat-option *ngFor="let option of categoryList" [value]="option">{{option}}</mat-option>
+                <mat-option *ngFor="let option of categoryList" [value]="option">{{option}}</mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Availability</mat-label>
+            <mat-select formControlName="availability" multiple>
+                <mat-option *ngFor="let option of availabilityList" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="f.annotation">
             <mat-label>Annotation</mat-label>
             <textarea type="text" matInput cdkTextareaAutosize formControlName="annotation"></textarea>
@@ -42,5 +48,5 @@
 
 <mat-dialog-actions>
     <button class="mat-raised-button" (click)="close()">Cancel</button>
-    <button class="mat-raised-button mat-primary" [disabled]="isLoading" (click)="onSave()">Save</button>
+    <button class="mat-raised-button mat-primary" [disabled]="isLoading || !bookForm.valid" (click)="onSave()">Save</button>
 </mat-dialog-actions>

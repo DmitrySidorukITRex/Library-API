@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index",
     "server": "nodemon index",
+    "cron": "node cron",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -27,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.8",
     "morgan": "^1.10.0",
+    "node-cron": "^3.0.0",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0"
   },

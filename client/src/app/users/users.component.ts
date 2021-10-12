@@ -38,6 +38,10 @@ export class UsersComponent implements OnInit {
         this.getData();
     }
 
+    public getPenaltyDueDate(date: string) {
+        return new Date(date).getTime() - new Date().getTime() > 0 ? date : null;
+    }
+
     public onAddUser(): void {
         const dialogRef = this.dialog.open(AddEditUserComponent, {
             width: '600px'

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { BookAvailability } from '../books.enum';
 import { IBook, ICreateBook } from '../books.interface';
 import { BooksService } from '../books.service';
 
@@ -21,6 +22,10 @@ export class AddEditBookComponent implements OnInit {
         'Historical',
         'Adventure'
     ];
+    public availabilityList: string[] = [
+        BookAvailability.takeaway,
+        BookAvailability.inTheRoom
+    ];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: {book: IBook},
@@ -35,6 +40,7 @@ export class AddEditBookComponent implements OnInit {
             originalAuthor: new FormControl(data?.book.originalAuthor || ''),
             annotation: new FormControl(data?.book.annotation || '', Validators.required),
             category: new FormControl(data?.book.category || [], Validators.required),
+            availability: new FormControl(data?.book.availability || [], Validators.required)
         });
     }
 
@@ -83,7 +89,8 @@ export class AddEditBookComponent implements OnInit {
             originalName: this.f.originalName.value,
             originalAuthor: this.f.originalAuthor.value,
             category: this.f.category.value,
-            annotation: this.f.annotation.value
+            annotation: this.f.annotation.value,
+            availability: this.f.availability.value
         }
     }
 

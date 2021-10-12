@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUserForLogin, IUserForRegister } from 'src/app/shared/interfaces/user.interface';
+import { IUserApi, IUserForLogin, IUserForRegister } from 'src/app/shared/interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
     private token: string = '';
     private isAdmin: boolean = false;
+    private userId: string;
 
     constructor(private http: HttpClient) { }
 
@@ -15,14 +16,16 @@ export class AuthService {
         return this.http.post<IUserForRegister>('api/auth/register', user);
     }
 
-    public login(user: IUserForLogin): Observable<{token: string, isAdmin: boolean}> {
-        return this.http.post<{token: string, isAdmin: boolean}>('/api/auth/login', user)
+    public login(user: IUserForLogin): Observable<{token: string, isAdmin: boolean, userId: string}> {
+        return this.http.post<{token: string, isAdmin: boolean, userId: string}>('/api/auth/login', user)
             .pipe(
-                tap(({token, isAdmin}) => {
+                tap(({token, isAdmin, userId}) => {
                     localStorage.setItem('auth-token', token);
                     localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+                    localStorage.setItem('userId', userId);
                     this.setToken(token);
                     this.setAdmin(isAdmin);
+                    this.setUserId(userId);
                 })
             );
     }
@@ -50,5 +53,13 @@ export class AuthService {
 
     public getAdmin(): boolean {
         return this.isAdmin;
+    }
+
+    public setUserId(userId: string): void {
+        this.userId = userId;
+    }
+
+    public getUserId(): string {
+        return this.userId;
     }
 }

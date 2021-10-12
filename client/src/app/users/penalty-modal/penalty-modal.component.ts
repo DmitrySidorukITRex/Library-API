@@ -20,7 +20,8 @@ export class PenaltyModalComponent implements OnInit {
         private dialogRef: MatDialogRef<PenaltyModalComponent>,
         private readonly usersService: UsersService
     ) {
-        this.penaltyControl = new FormControl(data.user.penalty);
+        const penalty = this.getPenaltyInSeconds(this.data.user.penaltyDueDate);
+        this.penaltyControl = new FormControl(penalty);
     }
 
     ngOnInit(): void {
@@ -32,16 +33,23 @@ export class PenaltyModalComponent implements OnInit {
 
     public onSave(): void {
         this.isLoading = true;
+        const currentDate = new Date();
+        currentDate.setSeconds(this.penaltyControl.value);
         const user = {
             ...this.data.user,
-            penalty: this.penaltyControl.value
+            penaltyDueDate: currentDate.toString()
         };
         this.usersService.updateUser(this.data.user._id, user)
             .pipe(untilDestroyed(this))
             .subscribe(() => {
                 this.isLoading = false;
                 this.dialogRef.close(true);
-            })
+            });
+    }
+
+    private getPenaltyInSeconds(penaltyDueDate: string): number {
+        return new Date(penaltyDueDate).getTime() - new Date().getTime() > 0
+            ? Math.round((new Date(penaltyDueDate).getTime() - new Date().getTime()) / 1000) : 0;
     }
 
 }

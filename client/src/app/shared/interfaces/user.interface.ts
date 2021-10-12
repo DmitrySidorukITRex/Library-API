@@ -12,8 +12,8 @@ export interface IUserForRegister extends IUserForLogin {
 interface IUser {
     name: string,
     address: string,
-    penalty: number,
-    email: string
+    email: string,
+    penaltyDueDate: string
 }
 
 export interface IUserView extends IUser {
@@ -23,7 +23,14 @@ export interface IUserView extends IUser {
 
 export interface IUserApi extends IUser {
     lastName: string,
-    books: {name: string, bookId: string}[],
+    books: IUserBook[],
     isAdmin: boolean,
     _id: string
+}
+
+export interface IUserBook {
+    name: string,
+    id: string,
+    isTakeAway: boolean,
+    takingTime?: Date
 }

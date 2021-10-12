@@ -5,6 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 import { TableFilterComponent } from './components/table-filter/table-filter.component';
 import { ToastService } from './services/toast.service';
+import { UserBookService } from './services/user-book.service';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ToastService } from './services/toast.service';
         MaterialModule
     ],
     providers: [
-        ToastService
+        ToastService,
+        UserBookService
     ],
     exports: [
         TableFilterComponent

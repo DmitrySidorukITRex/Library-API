@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserApi } from '../shared/interfaces/user.interface';
+import { IUserApi, IUserBook } from '../shared/interfaces/user.interface';
 
 @Injectable()
 export class UsersService {
@@ -10,10 +10,6 @@ export class UsersService {
 
     public getUsers(): Observable<IUserApi[]> {
         return this.http.get<IUserApi[]>('api/users');
-    }
-
-    public getUserById(id: string): Observable<IUserApi> {
-        return this.http.get<IUserApi>(`api/users/${id}`);
     }
 
     public createUser(user: IUserApi): Observable<IUserApi> {

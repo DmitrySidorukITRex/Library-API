@@ -1,3 +1,5 @@
+import { IUserBook } from "../shared/interfaces/user.interface";
+
 export interface IBook {
     name: string,
     author: string,
@@ -5,7 +7,9 @@ export interface IBook {
     annotation: string,
     originalName: string,
     originalAuthor: string,
+    availability: string[],
     isAvailable: boolean,
+    books: IUserBook[],
     userId: string,
     _id: string
 }
@@ -16,5 +20,6 @@ export interface ICreateBook {
     category: string[],
     annotation: string,
     originalName?: string,
-    originalAuthor?: string
+    originalAuthor?: string,
+    availability: string[]
 }

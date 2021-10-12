@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IUserBook } from '../shared/interfaces/user.interface';
 import { IBook, ICreateBook } from './books.interface';
 
 @Injectable()

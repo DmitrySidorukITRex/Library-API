@@ -24,15 +24,30 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="originalName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Original Title</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.originalName}} </mat-cell>
+        </ng-container>
     
         <ng-container matColumnDef="author">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.author}} </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="originalAuthor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Original Author</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.originalAuthor}} </mat-cell>
+        </ng-container>
     
         <ng-container matColumnDef="category">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{getCategoriesName(element.category)}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{getStringNameFromArray(element.category)}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="availability">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Availability</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{getStringNameFromArray(element.availability)}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
@@ -42,13 +57,21 @@
                     <span class="material-icons">more_vert</span>
                   </button>
                   <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="onEditBook(element._id)">
+                    <button mat-menu-item (click)="onEditBook(element._id)" *ngIf="isAdmin">
                         <span class="material-icons">edit</span>
                       <span>Edit</span>
                     </button>
-                    <button mat-menu-item (click)="onRemoveBook(element._id)">
+                    <button mat-menu-item (click)="onRemoveBook(element._id)" *ngIf="isAdmin">
                         <span class="material-icons">delete</span>
                       <span>Delete</span>
+                    </button>
+                    <button mat-menu-item [disabled]="isTakeBookDisabled(element)" (click)="onTakeBook(element)">
+                        <span class="material-icons">undo</span>
+                      <span>Take</span>
+                    </button>
+                    <button mat-menu-item [disabled]="isReturnBookDisabled(element)" (click)="onReturnBook(element)">
+                        <span class="material-icons">redo</span>
+                      <span>Return</span>
                     </button>
                   </mat-menu>
             </mat-cell>

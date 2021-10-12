@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Take {{ data.book.name }}</h2>
+
+<mat-dialog-content>
+    <div class="description">
+        You can take the book to the reading room or take it with you. If you take the book with you, you must return it after 30 seconds.
+    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>Way Of Taking</mat-label>
+        <mat-select [formControl]="control">
+            <mat-option *ngFor="let option of data.book.availability" [value]="option">{{option}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-primary" [disabled]="!control.valid" (click)="onTake()">Take</button>
+</mat-dialog-actions>
