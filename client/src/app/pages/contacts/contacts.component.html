@@ -1,0 +1,37 @@
+<div class="contacts">
+  <h1>Our Contacts:</h1>
+  <div class="contacts-information">
+    <div class="left-side">
+      <p>Library:</p>
+      <span>+375 (29) 529-53-50</span>
+    </div>
+    <div class="right-side">
+      <div class="address" *ngFor="let address of addresses">
+        <div>
+          <p>
+            {{ address.street + ", " + address.house + " | " + address.phone }}
+          </p>
+          <p>
+            {{
+              address.firstWorkingDay +
+                " - " +
+                address.lastWorkingDay +
+                ": " +
+                address.openingTime +
+                " - " +
+                address.closingTime
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="map">
+        <ya-map [center]="[53.907249, 27.561265]" [zoom]="11">
+          <ya-placemark
+            *ngFor="let address of addresses"
+            [geometry]="[address.lat, address.lng]"
+          ></ya-placemark>
+        </ya-map>
+      </div>
+    </div>
+  </div>
+</div>

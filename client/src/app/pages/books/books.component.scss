@@ -1,0 +1,13 @@
+.books {
+  padding: 32px;
+
+  .activities {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .add-book {
+    text-align: right;
+  }
+}

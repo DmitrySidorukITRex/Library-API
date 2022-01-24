@@ -1,0 +1,9 @@
+.users {
+  padding: 32px;
+
+  & > div {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+}

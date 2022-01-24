@@ -1,14 +1,29 @@
 <header>
-    <div class="logo">
-        <img src="assets/library-logo.png" height="100px">
-    </div>
-    <mat-list role="list">
-        <mat-list-item role="listitem" routerLink="/books" routerLinkActive="active-link">Books</mat-list-item>
-        <mat-list-item *ngIf="isAdmin" role="listitem" routerLink="/users" routerLinkActive="active-link">Users</mat-list-item>
-      </mat-list>
-    <div class="user-profile">
-        User name
-    </div>
+  <div class="logo">
+    <img src="assets/library-logo.png" height="100px" />
+  </div>
+  <mat-list role="list">
+    <mat-list-item
+      role="listitem"
+      routerLink="/books"
+      routerLinkActive="active-link"
+      >Books</mat-list-item
+    >
+    <mat-list-item
+      *ngIf="isAdmin"
+      role="listitem"
+      routerLink="/users"
+      routerLinkActive="active-link"
+      >Users</mat-list-item
+    >
+    <mat-list-item
+      role="listitem"
+      routerLink="/contacts"
+      routerLinkActive="active-link"
+      >Contacts</mat-list-item
+    >
+  </mat-list>
+  <div class="user-profile">User name</div>
 </header>
 
 <router-outlet></router-outlet>
