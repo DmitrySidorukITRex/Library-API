@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="bookForm">
+        <mat-form-field appearance="outline" *ngIf="f.name">
+            <mat-label>Title</mat-label>
+            <input type="text" matInput formControlName="name">
+            <mat-error *ngIf="f.name.hasError('required')">
+                Title is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="f.author">
+            <mat-label>Author</mat-label>
+            <input type="text" matInput formControlName="author">
+            <mat-error *ngIf="f.author.hasError('required')">
+                Author is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="f.originalName">
+            <mat-label>Original Title</mat-label>
+            <input type="text" matInput formControlName="originalName">
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="f.originalAuthor">
+            <mat-label>Original Author</mat-label>
+            <input type="text" matInput formControlName="originalAuthor">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" multiple>
+                <mat-option *ngFor="let option of categoryList" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Availability</mat-label>
+            <mat-select formControlName="availability" multiple>
+                <mat-option *ngFor="let option of availabilityList" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="f.annotation">
+            <mat-label>Annotation</mat-label>
+            <textarea type="text" matInput cdkTextareaAutosize formControlName="annotation"></textarea>
+            <mat-error *ngIf="f.annotation.hasError('required')">
+                Annotation is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-primary" [disabled]="isLoading || !bookForm.valid" (click)="onSave()">Save</button>
+</mat-dialog-actions>

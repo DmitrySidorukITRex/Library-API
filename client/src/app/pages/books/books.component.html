@@ -1,0 +1,84 @@
+<div class="books">
+    <div class="activities">
+        <mat-form-field appearance="standard">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="searchByName($event)" placeholder="Enter the title of the book" #input>
+        </mat-form-field>
+        <button mat-button (click)="manageFilter()">{{getManageFilterText}}</button>
+    </div>
+    <lib-table-filter
+        *ngIf="isFilterOpened"
+        [filterFields]="filterFields"
+        [filterValues]="filterValues"
+        (selectFilterField)="onSelectFilterField($event)"
+        (applyFilter)="onApplyFilter($event)"
+        (resetFilter)="onResetFilter()"
+    ></lib-table-filter>
+
+    <div class="add-book" *ngIf="isAdmin">
+        <button mat-raised-button color="primary" (click)="onAddBook()">Add Book</button>
+    </div>
+
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="originalName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Original Title</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.originalName}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="author">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.author}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="originalAuthor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Original Author</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.originalAuthor}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{getStringNameFromArray(element.category)}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="availability">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Availability</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{getStringNameFromArray(element.availability)}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <span class="material-icons">more_vert</span>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="onEditBook(element._id)" *ngIf="isAdmin">
+                        <span class="material-icons">edit</span>
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="onRemoveBook(element._id)" *ngIf="isAdmin">
+                        <span class="material-icons">delete</span>
+                      <span>Delete</span>
+                    </button>
+                    <button mat-menu-item [disabled]="isTakeBookDisabled(element)" (click)="onTakeBook(element)">
+                        <span class="material-icons">undo</span>
+                      <span>Take</span>
+                    </button>
+                    <button mat-menu-item [disabled]="isReturnBookDisabled(element)" (click)="onReturnBook(element)">
+                        <span class="material-icons">redo</span>
+                      <span>Return</span>
+                    </button>
+                  </mat-menu>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+</div>

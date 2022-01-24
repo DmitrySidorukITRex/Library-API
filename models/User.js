@@ -20,15 +20,23 @@ const userSchema = new Schema({
                 type: String,
                 required: true
             },
-            bookId: {
+            id: {
                 type: String,
                 required: true
+            },
+            isTakeAway: {
+                type: Boolean,
+                required: true
+            },
+            takingTime: {
+                type: Date,
+                default: new Date()
             }
         }
     ],
-    penalty: {
-        type: Number,
-        default: 0
+    penaltyDueDate: {
+        type: Date,
+        default: new Date()
     },
     isAdmin: {
         type: Boolean,
@@ -41,7 +49,8 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        default: '123'
     }
 });
 

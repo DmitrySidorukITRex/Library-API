@@ -11,7 +11,7 @@ const bookSchema = new Schema({
         required: true
     },
     category: {
-        type: String,
+        type: Array,
         required: true
     },
     annotation: {
@@ -28,9 +28,9 @@ const bookSchema = new Schema({
         type: Boolean,
         default: true
     },
-    user: {
-        ref: 'user',
-        type: Schema.Types.ObjectId
+    availability: {
+        type: Array,
+        required: true
     }
 });
 
