@@ -1,0 +1,8 @@
+<div class="component">
+  <div class="information">
+    <youtube-player
+      *ngFor="let video of videoList; let i = index"
+      [videoId]="getVideoId(video)"
+    ></youtube-player>
+  </div>
+</div>

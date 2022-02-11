@@ -10,29 +10,25 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const modules = [
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatInputModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatSnackBarModule
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatButtonModule,
+  MatInputModule,
+  MatDialogModule,
+  MatCheckboxModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatSnackBarModule,
+  MatTabsModule,
 ];
 
-
 @NgModule({
-    declarations: [],
-    imports: [
-        CommonModule,
-        modules
-    ],
-    exports: [
-        modules
-    ]
+  declarations: [],
+  imports: [CommonModule, modules],
+  exports: [modules],
 })
-export class MaterialModule { }
+export class MaterialModule {}

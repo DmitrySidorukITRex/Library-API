@@ -1,0 +1,89 @@
+.component {
+  main {
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+    padding: 32px;
+
+    .poster img {
+      width: 300px;
+      height: 450px;
+      border-radius: 4px;
+    }
+
+    .content {
+      margin-left: 40px;
+
+      .about-film {
+        display: flex;
+
+        .info-wrapper {
+          display: flex;
+          flex-direction: column;
+
+          .info {
+            display: flex;
+            align-items: center;
+            width: 580px;
+            font-size: 13px;
+            line-height: 18px;
+            padding: 8px 0;
+
+            .title {
+              width: 160px;
+              color: rgba(255, 255, 255, 0.6);
+            }
+          }
+        }
+
+        .actors {
+          div {
+            line-height: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    padding: 32px;
+
+    ::ng-deep .mat-tab-header {
+      margin-bottom: 20px;
+    }
+
+    mat-tab-group {
+      align-items: center;
+    }
+
+    .player {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .description {
+        max-width: 1240px;
+        font-size: 16px;
+        line-height: 22px;
+        color: rgb(57, 57, 57);
+        margin-bottom: 20px;
+      }
+    }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      img {
+        width: 400px;
+      }
+    }
+
+    video {
+      width: 600px;
+      height: 400px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<div class="component">
+  <div class="actions" *ngIf="isAdmin">
+    <button mat-raised-button color="primary" (click)="onAddFilm()">
+      Add Film
+    </button>
+  </div>
+  <div class="films-list">
+    <div class="film-wrapper" *ngFor="let film of allFilms">
+      <div class="film-preview">
+        <img [src]="film.imageSrc" />
+        <div class="actions">
+          <span (click)="navigateToDetails(film.idkp)">Details</span>
+        </div>
+      </div>
+      <div class="film-info">{{ film.title }}</div>
+    </div>
+  </div>
+</div>

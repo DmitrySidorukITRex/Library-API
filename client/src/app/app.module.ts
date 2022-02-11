@@ -9,6 +9,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './pages/users/users.module';
 import { ContactsModule } from './pages/contacts/contacts.module';
+import { AboutUsModule } from './pages/about-us/about-us.module';
+import { FilmsModule } from './pages/films/films.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +24,8 @@ import { ContactsModule } from './pages/contacts/contacts.module';
     BooksModule,
     UsersModule,
     ContactsModule,
+    AboutUsModule,
+    FilmsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

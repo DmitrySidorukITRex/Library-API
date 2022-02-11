@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="filmForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input type="text" matInput formControlName="title" />
+      <mat-error *ngIf="f.title.hasError('required')">
+        Title is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Kinopoisk ID</mat-label>
+      <input type="text" matInput formControlName="idkp" />
+      <mat-error *ngIf="f.idkp.hasError('required')">
+        Kinopoisk ID is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <!-- <mat-label>Poster</mat-label> -->
+      <button type="button" mat-raised-button (click)="fileInput.click()">
+        Choose Poster
+      </button>
+      <input
+        hidden
+        (change)="onFileSelected($event)"
+        #fileInput
+        type="file"
+        formControlName="poster"
+      />
+      <!-- <mat-error *ngIf="f.poster.hasError('required')">
+        Poster is <strong>required</strong>
+      </mat-error> -->
+    </div>
+
+    <div class="dropzone">
+      <input
+        type="file"
+        accept="video/mp4,video/x-m4v,video/*"
+        #fileDropRef
+        id="fileDropRef"
+        (change)="fileBrowseHandler($event)"
+      />
+      <span class="material-icons-outlined"> file_upload </span>
+      <h3>Drag and drop film here</h3>
+      <h3>or</h3>
+      <label for="fileDropRef">Browse for film</label>
+    </div>
+    <!-- <div class="files-list">
+      <div class="file" *ngFor="let file of files">
+        <span class="material-icons-outlined"> description </span>
+        <div class="info">
+          <h4 class="name">{{ file.name }}</h4>
+          <p class="size">{{ formatBytes(file.size) }}</p>
+          <div class="progress-cont">
+            <div class="progress" [style.width]="file.progress + '%'"></div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Cancel</button>
+  <button
+    class="mat-raised-button mat-primary"
+    [disabled]="isLoading"
+    (click)="onSave()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

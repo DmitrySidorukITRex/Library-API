@@ -8,21 +8,14 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-    declarations: [
-        SiteLayoutComponent
-    ],
-    imports: [
-        CommonModule,
-        AuthModule,
-        AppRoutingModule,
-        MatListModule
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            multi: true,
-            useClass: TokenInterceptor
-        }
-    ]
+  declarations: [SiteLayoutComponent],
+  imports: [CommonModule, AuthModule, AppRoutingModule, MatListModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor,
+    },
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

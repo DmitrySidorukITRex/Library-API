@@ -1,0 +1,96 @@
+<div class="component" *ngIf="filmDetails">
+  <main>
+    <div class="poster">
+      <img [src]="posterUrl" />
+    </div>
+    <div class="content">
+      <h1>{{ filmDetails.title + " (" + filmDetails.year + ")" }}</h1>
+      <h2>About Film</h2>
+      <div class="about-film">
+        <div class="info-wrapper">
+          <div class="info">
+            <div class="title">Production year</div>
+            <div class="value">{{ filmDetails.year }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Country</div>
+            <div class="value">{{ getListFromArr(filmDetails.countries) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Genre</div>
+            <div class="value">{{ getListFromArr(filmDetails.genres) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Director</div>
+            <div class="value">{{ getListFromArr(filmDetails.directors) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Scenario</div>
+            <div class="value">
+              {{ getListFromArr(filmDetails.screenwriters) }}
+            </div>
+          </div>
+          <div class="info">
+            <div class="title">Operator</div>
+            <div class="value">{{ getListFromArr(filmDetails.operators) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Composer</div>
+            <div class="value">{{ getListFromArr(filmDetails.composers) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Painter</div>
+            <div class="value">{{ getListFromArr(filmDetails.painters) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">Editor</div>
+            <div class="value">{{ getListFromArr(filmDetails.editors) }}</div>
+          </div>
+          <div class="info">
+            <div class="title">World premiere</div>
+            <div class="value">{{ filmDetails.premiere_world }}</div>
+          </div>
+          <div class="info" *ngIf="filmDetails.age">
+            <div class="title">Age</div>
+            <div class="value">{{ filmDetails.age }}</div>
+          </div>
+          <div class="info" *ngIf="filmDetails.rating_kinopoisk">
+            <div class="title">Rating kinopoisk</div>
+            <div class="value">{{ filmDetails.rating_kinopoisk }}</div>
+          </div>
+          <div class="info" *ngIf="filmDetails.rating_imdb">
+            <div class="title">Rating IMDB</div>
+            <div class="value">{{ filmDetails.rating_imdb }}</div>
+          </div>
+        </div>
+
+        <div class="actors">
+          <h3>In main roles:</h3>
+          <div *ngFor="let actor of filmDetails.actors">
+            {{ actor }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <mat-tab-group>
+      <mat-tab label="Player">
+        <div class="player">
+          <div class="description">{{ filmDetails.description }}</div>
+          <video id="videoPlayer" controls muted="muted">
+            <source [src]="filmSrc" type="video/mp4" />
+          </video>
+        </div>
+      </mat-tab>
+      <mat-tab label="Screenshots">
+        <div class="screenshots">
+          <div *ngFor="let screen of filmDetails.screenshots">
+            <img [src]="screen" />
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </footer>
+</div>

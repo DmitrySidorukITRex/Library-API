@@ -1,0 +1,132 @@
+.component {
+  padding: 32px;
+  background-color: #000;
+  min-height: calc(100% - 164px);
+
+  .files-list {
+    margin: 0 auto;
+    margin-top: 24px;
+    width: 514px;
+
+    .file {
+      display: flex;
+      padding: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+      border: dashed 1px #979797;
+      margin-bottom: 1rem;
+
+      span {
+        font-size: 50px;
+        color: #a4a4a4;
+      }
+
+      .info {
+        width: 100%;
+
+        .name {
+          font-size: 14px;
+          font-weight: 500;
+          color: #353f4a;
+          margin: 0;
+        }
+
+        .size {
+          font-size: 12px;
+          font-weight: 500;
+          color: #a4a4a4;
+          margin: 0;
+          margin-bottom: 0.25rem;
+        }
+
+        .progress-cont {
+          height: 7px;
+          width: 100%;
+          border-radius: 4px;
+          background-color: #d0d0d0;
+          position: relative;
+
+          .progress {
+            width: 0;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            border-radius: 4px;
+            background-color: #4c97cb;
+            transition: 0.5s all;
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .films-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 20px;
+
+    .film-wrapper {
+      display: flex;
+      flex-direction: column;
+      // width: 300px;
+      height: 200px;
+      border-radius: 8px;
+
+      .film-preview {
+        width: 100%;
+        height: 170px;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
+        }
+
+        .actions {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 60px;
+          color: #fff;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          border: 2px solid #fff;
+          border-radius: 8px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        &:hover {
+          img {
+            opacity: 0.5;
+          }
+
+          .actions {
+            display: flex;
+          }
+        }
+      }
+
+      .film-info {
+        margin-top: 12px;
+        font-size: 15px;
+        color: #fff;
+        position: relative;
+      }
+    }
+  }
+}
