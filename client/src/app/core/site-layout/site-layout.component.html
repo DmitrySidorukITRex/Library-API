@@ -7,32 +7,32 @@
       role="listitem"
       routerLink="/books"
       routerLinkActive="active-link"
-      >Books</mat-list-item
+      >{{ "navigation.books" | transloco }}</mat-list-item
     >
     <mat-list-item
       role="listitem"
       routerLink="/films"
       routerLinkActive="active-link"
-      >Films</mat-list-item
+      >{{ "navigation.films" | transloco }}</mat-list-item
     >
     <mat-list-item
       *ngIf="isAdmin"
       role="listitem"
       routerLink="/users"
       routerLinkActive="active-link"
-      >Users</mat-list-item
+      >{{ "navigation.users" | transloco }}</mat-list-item
     >
     <mat-list-item
       role="listitem"
       routerLink="/contacts"
       routerLinkActive="active-link"
-      >Contacts</mat-list-item
+      >{{ "navigation.contacts" | transloco }}</mat-list-item
     >
     <mat-list-item
       role="listitem"
       routerLink="/about-us"
       routerLinkActive="active-link"
-      >About Us</mat-list-item
+      >{{ "navigation.aboutUs" | transloco }}</mat-list-item
     >
   </mat-list>
   <div class="user-profile">User name</div>

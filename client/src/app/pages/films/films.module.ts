@@ -6,10 +6,16 @@ import { FilmDetailsComponent } from './film-details/film-details.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { AddEditFilmComponent } from './add-edit-film/add-edit-film.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FilmsRoutingModule } from './films-routing.module';
 
 @NgModule({
   declarations: [FilmsComponent, FilmDetailsComponent, AddEditFilmComponent],
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FilmsRoutingModule,
+  ],
   providers: [FilmsService],
 })
 export class FilmsModule {}

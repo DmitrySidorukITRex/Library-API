@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NewFilm } from './films.interface';
+import { FilmApi, NewFilm } from './films.interface';
 
 @Injectable()
 export class FilmsService {
@@ -9,8 +9,8 @@ export class FilmsService {
 
   constructor(private readonly http: HttpClient) {}
 
-  public getAllFilms(): Observable<any> {
-    return this.http.get<any>('api/films');
+  public getAllFilms(): Observable<FilmApi[]> {
+    return this.http.get<FilmApi[]>('api/films');
   }
 
   public addNewFilm(film: NewFilm): Observable<any> {

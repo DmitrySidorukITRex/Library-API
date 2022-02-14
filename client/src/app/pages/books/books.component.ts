@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -25,6 +30,7 @@ import { TakeBookModalComponent } from './take-book-modal/take-book-modal.compon
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksComponent implements OnInit {
   public books: IBook[] = [];

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ToastTypes } from 'src/app/shared/enums/enum';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -14,12 +15,13 @@ import { FilmsService } from './films.service';
   selector: 'app-films',
   templateUrl: './films.component.html',
   styleUrls: ['./films.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmsComponent implements OnInit {
   public isAdmin: boolean = false;
   public files: any[] = [];
 
-  public allFilms: FilmApi[] = [];
+  public allFilms$: Observable<FilmApi[]>;
 
   constructor(
     private readonly authService: AuthService,
@@ -32,6 +34,10 @@ export class FilmsComponent implements OnInit {
   ngOnInit(): void {
     this.isAdmin = this.authService.getAdmin();
     this.getAllFilms();
+  }
+
+  public filmById(index: number, film: FilmApi): string {
+    return film.idkp;
   }
 
   public onAddFilm(): void {
@@ -65,12 +71,6 @@ export class FilmsComponent implements OnInit {
   }
 
   private getAllFilms(): void {
-    this.filmsService
-      .getAllFilms()
-      .pipe(untilDestroyed(this))
-      .subscribe((films) => {
-        console.log(films);
-        this.allFilms = films;
-      });
+    this.allFilms$ = this.filmsService.getAllFilms();
   }
 }

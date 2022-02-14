@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FilmsService } from '../films.service';
@@ -8,6 +8,7 @@ import { FilmsService } from '../films.service';
   selector: 'app-film-details',
   templateUrl: './film-details.component.html',
   styleUrls: ['./film-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmDetailsComponent implements OnInit {
   public filmDetails: any;

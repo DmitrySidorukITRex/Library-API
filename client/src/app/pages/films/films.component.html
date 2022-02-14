@@ -5,7 +5,10 @@
     </button>
   </div>
   <div class="films-list">
-    <div class="film-wrapper" *ngFor="let film of allFilms">
+    <div
+      class="film-wrapper"
+      *ngFor="let film of allFilms$ | async; trackBy: filmById"
+    >
       <div class="film-preview">
         <img [src]="film.imageSrc" />
         <div class="actions">

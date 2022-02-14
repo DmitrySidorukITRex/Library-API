@@ -6,10 +6,21 @@ import { UsersComponent } from './users.component';
 import { UsersService } from './users.service';
 import { PenaltyModalComponent } from './penalty-modal/penalty-modal.component';
 import { MaterialModule } from '../../material/material.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [UsersComponent, AddEditUserComponent, PenaltyModalComponent],
-  imports: [CommonModule, ReactiveFormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: UsersComponent,
+      },
+    ]),
+  ],
   providers: [UsersService],
 })
 export class UsersModule {}
