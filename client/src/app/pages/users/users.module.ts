@@ -7,6 +7,8 @@ import { UsersService } from './users.service';
 import { PenaltyModalComponent } from './penalty-modal/penalty-modal.component';
 import { MaterialModule } from '../../material/material.module';
 import { RouterModule } from '@angular/router';
+import { NgxsModule } from '@ngxs/store';
+import { UsersState } from './state/users.state';
 
 @NgModule({
   declarations: [UsersComponent, AddEditUserComponent, PenaltyModalComponent],
@@ -20,6 +22,7 @@ import { RouterModule } from '@angular/router';
         component: UsersComponent,
       },
     ]),
+    NgxsModule.forFeature([UsersState]),
   ],
   providers: [UsersService],
 })

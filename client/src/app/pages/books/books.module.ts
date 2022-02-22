@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddEditBookComponent } from './add-edit-book/add-edit-book.component';
 import { BooksComponent } from './books.component';
 import { BooksService } from './books.service';
+import { BooksStateService } from './state/books.service';
 import { TakeBookModalComponent } from './take-book-modal/take-book-modal.component';
 
 @NgModule({
@@ -23,6 +24,6 @@ import { TakeBookModalComponent } from './take-book-modal/take-book-modal.compon
       },
     ]),
   ],
-  providers: [BooksService],
+  providers: [BooksService, BooksStateService],
 })
 export class BooksModule {}

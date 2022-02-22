@@ -9,14 +9,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { ConfirmationModalComponent } from '../../shared/components/confirmation-modal/confirmation-modal.component';
 import { ToastTypes } from '../../shared/enums/enum';
 import { IUserApi, IUserView } from '../../shared/interfaces/user.interface';
 import { ToastService } from '../../shared/services/toast.service';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { PenaltyModalComponent } from './penalty-modal/penalty-modal.component';
+import { Users } from './state/users.actions';
+import { UsersState } from './state/users.state';
 import { getUsersForTable } from './users.mapper';
-import { UsersService } from './users.service';
 
 @UntilDestroy()
 @Component({
@@ -43,13 +46,23 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  @Select(UsersState) users$: Observable<IUserApi[]>;
+
   constructor(
-    private readonly usersService: UsersService,
     private readonly dialog: MatDialog,
-    private readonly toastService: ToastService
+    private readonly toastService: ToastService,
+    private readonly store: Store
   ) {}
 
   ngOnInit(): void {
+    this.users$.pipe(untilDestroyed(this)).subscribe((users) => {
+      this.users = users;
+      this.dataSource = new MatTableDataSource(getUsersForTable(users));
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.isLoading = false;
+    });
+
     this.getData();
   }
 
@@ -107,21 +120,12 @@ export class UsersComponent implements OnInit {
 
   private getData(): void {
     this.isLoading = true;
-    this.usersService
-      .getUsers()
-      .pipe(untilDestroyed(this))
-      .subscribe((users) => {
-        this.users = users;
-        this.dataSource = new MatTableDataSource(getUsersForTable(users));
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.isLoading = false;
-      });
+    this.store.dispatch(new Users.GetAll());
   }
 
   private removeUser(id: string): void {
-    this.usersService
-      .removeUser(id)
+    this.store
+      .dispatch(new Users.Remove(id))
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {

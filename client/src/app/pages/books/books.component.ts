@@ -23,6 +23,8 @@ import { AddEditBookComponent } from './add-edit-book/add-edit-book.component';
 import { BookAvailability, BookTableFiltersValue } from './books.enum';
 import { IBook } from './books.interface';
 import { BooksService } from './books.service';
+import { BooksQuery } from './state';
+import { BooksStateService } from './state/books.service';
 import { TakeBookModalComponent } from './take-book-modal/take-book-modal.component';
 
 @UntilDestroy()
@@ -65,12 +67,22 @@ export class BooksComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly toastService: ToastService,
     private readonly authService: AuthService,
-    private readonly userBookService: UserBookService
+    private readonly userBookService: UserBookService,
+    private readonly booksStateService: BooksStateService,
+    private readonly booksQuery: BooksQuery
   ) {
     this.isAdmin = this.authService.getAdmin();
   }
 
   ngOnInit(): void {
+    this.booksQuery.books$.pipe(untilDestroyed(this)).subscribe((books) => {
+      this.books = books;
+      this.dataSource = new MatTableDataSource(books);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.isLoading = false;
+    });
+
     this.getUser();
     this.getData();
   }
@@ -217,16 +229,7 @@ export class BooksComponent implements OnInit {
 
   private getData(): void {
     this.isLoading = true;
-    this.booksService
-      .getAllBooks()
-      .pipe(untilDestroyed(this))
-      .subscribe((books) => {
-        this.books = books;
-        this.dataSource = new MatTableDataSource(books);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.isLoading = false;
-      });
+    this.booksStateService.getAll();
   }
 
   private getUser(): void {
@@ -237,8 +240,8 @@ export class BooksComponent implements OnInit {
   }
 
   private removeBook(id: string): void {
-    this.booksService
-      .removeBook(id)
+    this.booksStateService
+      .remove(id)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {

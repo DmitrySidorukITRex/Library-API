@@ -1,7 +1,7 @@
 import { IUserApi, IUserView } from '../../shared/interfaces/user.interface';
 
 export function getUsersForTable(users: IUserApi[]): IUserView[] {
-  const usersForTable = users.map((x) => ({
+  const usersForTable = users?.map((x) => ({
     name: `${x.lastName} ${x.name}`,
     address: x.address,
     books: x.books.map((x) => x.name).join(', '),

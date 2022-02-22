@@ -5,7 +5,7 @@ import { FilmApi, NewFilm } from './films.interface';
 
 @Injectable()
 export class FilmsService {
-  private tokenKP = '406532ff343e483e7478f9c717d8cb50';
+  private tokenKP = '65c9adfdbdbb247942b322fb72adf9e4';
 
   constructor(private readonly http: HttpClient) {}
 
